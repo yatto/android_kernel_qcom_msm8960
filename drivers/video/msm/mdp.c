@@ -2607,23 +2607,9 @@ int mdp_bus_scale_update_request(u64 ab, u64 ib)
 	bus_index++;
 	bus_index = (bus_index > 2) ? 1 : bus_index;
 
-#if defined(CONFIG_MACH_APQ8064_FLO) || defined(CONFIG_MACH_APQ8064_DEB)
-	if (type==0) //keep original ab, ib calculation for JDI panel
-#endif
-		mdp_bus_usecases[bus_index].vectors->ab = min(ab, mdp_max_bw);
-#if defined(CONFIG_MACH_APQ8064_FLO) || defined(CONFIG_MACH_APQ8064_DEB)
-	else
-		mdp_bus_usecases[bus_index].vectors->ab = mdp_max_bw;
-#endif
+        mdp_bus_usecases[bus_index].vectors->ab = mdp_max_bw;
 	ib = max(ib, ab);
-#if defined(CONFIG_MACH_APQ8064_FLO) || defined(CONFIG_MACH_APQ8064_DEB)
-	if (type==0) //keep original ab, ib calculation for JDI panel
-#endif
-		mdp_bus_usecases[bus_index].vectors->ib = min(ib, mdp_max_bw);
-#if defined(CONFIG_MACH_APQ8064_FLO) || defined(CONFIG_MACH_APQ8064_DEB)
-	else
-		mdp_bus_usecases[bus_index].vectors->ib = mdp_max_bw;
-#endif
+	mdp_bus_usecases[bus_index].vectors->ib = mdp_max_bw;
 
 	pr_debug("%s: handle=%d index=%d ab=%llu ib=%llu\n", __func__,
 		 (u32)mdp_bus_scale_handle, bus_index,
