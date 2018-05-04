@@ -281,9 +281,6 @@ struct platform_device device_kgsl_3d0 = {
 void __init apq8064_init_gpu(void)
 {
 	unsigned int version = socinfo_get_version();
-	if (max_gpu == 0)
-		kgsl_3d0_pdata.pwrlevel[0].gpu_freq = 400000000;
-
 	if (cpu_is_apq8064ab())
 		kgsl_3d0_pdata.pwrlevel[0].gpu_freq = 450000000;
 	if (SOCINFO_VERSION_MAJOR(version) == 2) {
